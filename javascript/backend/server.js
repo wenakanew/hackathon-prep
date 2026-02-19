@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Configure Gemini
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
 // API endpoint for chatbot
 app.post("/api/chat", async (req, res) => {
@@ -19,12 +19,17 @@ app.post("/api/chat", async (req, res) => {
 
     const chatHistory = history || [];
 
-    chatHistory.push({ role: "user", parts: message });
+    // Use startChat() with history for conversational context
+    const chat = model.startChat({
+      history: chatHistory,
+    });
 
-    const result = await model.generateContent(chatHistory);
+    const result = await chat.sendMessage(message);
     const reply = result.response.text();
 
-    chatHistory.push({ role: "model", parts: reply });
+    // Add both user and model messages to history
+    chatHistory.push({ role: "user", parts: [{ text: message }] });
+    chatHistory.push({ role: "model", parts: [{ text: reply }] });
 
     res.json({
       reply,
@@ -37,4 +42,4 @@ app.post("/api/chat", async (req, res) => {
 });
 
 const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); on port ${PORT}`));

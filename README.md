@@ -134,7 +134,7 @@ hackathon-prep/javascript/
 ```bash
 cd backend
 npm init -y
-npm install @google/generative-ai dotenv
+npm install express cors dotenv @google/generative-ai
 ```
 
 🔹 Create a `.env` file:

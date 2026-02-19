@@ -133,7 +133,8 @@ hackathon-prep/javascript/
 
 ```bash
 cd backend
-npm install
+npm init -y
+npm install @google/generative-ai dotenv
 ```
 
 🔹 Create a `.env` file:

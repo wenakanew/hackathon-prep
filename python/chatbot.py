@@ -7,7 +7,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Create the model
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-3-flash-preview")
 
 def chat():
     print("Gemini Chatbot (Python). Type 'exit' to quit.\n")
@@ -28,7 +28,7 @@ def chat():
         )
 
         bot_reply = response.text
-        print("Bot:", bot_reply)
+        print("Gemini:", bot_reply)
 
         # Add bot output to history
         history.append({"role": "model", "parts": bot_reply})

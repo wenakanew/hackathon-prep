@@ -196,6 +196,8 @@ If you see failures from the Gemini API, verify:
 
 ---
 
+**If you found this helpful, remember to leave a star**
+
 ## 📜 License
 
 This repository is open-source for educational and hackathon use.
